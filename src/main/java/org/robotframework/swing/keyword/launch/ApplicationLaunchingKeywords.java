@@ -72,7 +72,8 @@ public class ApplicationLaunchingKeywords {
 
     private Method getMainMethod(String className)
             throws ClassNotFoundException {
-        Class<?> clss = Class.forName(className);
+        Class<?> clss = Thread.currentThread().getContextClassLoader()
+                .loadClass(className);
         try {
             return clss.getMethod("main", String[].class);
         } catch (NoSuchMethodException e) {
